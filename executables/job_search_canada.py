@@ -1,4 +1,6 @@
-import webbrowser, sys
+#! python3
+import sys
+import webbrowser
 
 POSTAL_ABBREVIATIONS = {
     "ontario": "on",
@@ -13,24 +15,27 @@ POSTAL_ABBREVIATIONS = {
     "newfoundland and labrador": "nl"
 }
 
-args = sys.argv # ['web_browser_module.py','montreal','QC','python','developer']
+args = sys.argv  # ['job_search_canada.py','bc,vancouver','python','developer']
+if len(args) < 4:
+    raise SystemExit("usage: $:python job_search_canada.py province_code,city  job_title")
 place_input = args[1].split(',')
 job_title_input = args[2:]
 
 
-
 def get_indeed_url(place, job):
     """
-    Returns a website url to search jobs
-    :param province:
-    :param job_title:
-    :param city:
-    :return:
+    Opens a indeed tab in the default browser with job search results
+    :param place: string, the place. Ie, "bc,vancouver"
+    :param job: string, the job title. Ie, "software developer"
     """
-    province = place[0].replace('.', '+')
-    city = place[1].replace('.', '+') if len(place) > 1 else False
+    province = place[0].replace(' ', '+')
+    if len(province) > 2:
+        province = POSTAL_ABBREVIATIONS[province.lower()].upper()
+    city = place[1].replace('.', '+') if len(place) > 1 else None
     job_title = "+".join(job)
-    location = "{}%2C+{}".format(city.title(), POSTAL_ABBREVIATIONS[province.lower()].upper()) if city else province.title()
+    location = province.title()
+    if city:
+        location = "{}%2C+{}".format(city.title(), province.upper())
     indeed_url = 'https://ca.indeed.com/jobs?q={}&l={}'.format(job_title, location)
 
     webbrowser.open(indeed_url)
@@ -38,6 +43,11 @@ def get_indeed_url(place, job):
 
 
 def get_linkedin_url(place, job):
+    """
+    Opens a LinkedIn tab in the default browser with job search results
+    :param place: string, the place. Ie, "bc,vancouver"
+    :param job: string, the job title. Ie, "software developer"
+    """
     province = (place[0].replace('.', '%20')).title()
     city = (place[1].replace('.', '%20')).title() if len(place) > 1 else False
     location = "{}%2C%20{}%2C%20Canada".format(city, province) if city else province
@@ -47,5 +57,5 @@ def get_linkedin_url(place, job):
     return linkedin_url
 
 
-get_indeed_url(place_input, job_title_input)
 get_linkedin_url(place_input, job_title_input)
+get_indeed_url(place_input, job_title_input)

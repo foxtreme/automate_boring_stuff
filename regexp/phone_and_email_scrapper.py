@@ -1,6 +1,9 @@
 #! python3
+
+
 import pyperclip
 import re
+
 # create a regex for phone numbers
 phone_regex = re.compile(r'''
 # 415-666-0000, 554-0000, (789) 485-0000 ext 12345, ext.12345, x12345
@@ -14,7 +17,7 @@ phone_regex = re.compile(r'''
 ''', re.VERBOSE)
 # Create a regex for email addresses
 email_regex = re.compile(r'''
-# some .+_thing@(\d{2,5}))?.com
+# some.+_thing@(\d{2,5}))?.com
 [a-zA-Z0-9_.+]+     # name part
 @                   # @ symbol
 [a-zA-Z0-9_.+]+     # domain name part

@@ -20,22 +20,22 @@ print(mo.group())  # prints Batmobile
 mo = bat_regex.search('Batmotorcycle lost a wheel')
 # print(mo.group())  # fails
 mo = bat_regex.search('Batmobile lost a wheel')
-print(mo.group(1))  # prints which sufix was found
+print(mo.group(1))  # prints which suffix was found
 
 # =================== repetitions ======================
 print(' begins repetitions '.center(70, '='))
-bat_regex = re.compile(r'Bat(wo)?man') # question mark means can appear 1 or 0 times
+bat_regex = re.compile(r'Bat(wo)?man')  # question mark means can appear 1 or 0 times
 mo = bat_regex.search("The adventures of Batman")
 print(mo.group())
 mo = bat_regex.search("The adventures of Batwoman")
 print(mo.group())
 mo = bat_regex.search("The adventures of Batwowowowoman")
-print(mo == None)
+print(mo is None)
 message = "My phone number is 555-1234. Call me tomorrow"
 print(message)
 phone_regex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
 mo = phone_regex.search(message)
-print('failed to found it?', mo == None)
+print('failed to found it?', mo is None)
 print('Now with repetitions \'? mark\' ')
 phone_regex = re.compile(r'(\d\d\d-)?\d\d\d-\d\d\d\d')
 mo = phone_regex.search(message)
@@ -51,7 +51,7 @@ print(mo)
 print('Now with + mark')
 bat_regex = re.compile(r'Bat(wo)+man')
 mo = bat_regex.search("The adventures of Batman")
-print('Failed to find it?', mo == None)
+print('Failed to find it?', mo is None)
 mo = bat_regex.search("The adventures of Batwoman")
 print(mo)
 mo = bat_regex.search("The adventures of Batwowowowoman")
