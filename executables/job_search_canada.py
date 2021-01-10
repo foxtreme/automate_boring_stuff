@@ -16,7 +16,7 @@ POSTAL_ABBREVIATIONS = {
 }
 
 args = sys.argv  # ['job_search_canada.py','bc,vancouver','python','developer']
-if len(args) < 4:
+if len(args) < 3:
     raise SystemExit("usage: $:python job_search_canada.py province_code,city  job_title")
 place_input = args[1].split(',')
 job_title_input = args[2:]
