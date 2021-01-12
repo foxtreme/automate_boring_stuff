@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 executables/git_token.*
+web_scrapping/*.ods
